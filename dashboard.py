@@ -40,9 +40,12 @@ with st.empty():
                     'ScatterplotLayer',
                     data=df,
                     get_position='[longitude, latitude]',
-                    get_radius=1000,
+                    radius_scale=6,
+                    radius_min_pixels=10,
+                    radius_max_pixels=5,
+                    line_width_min_pixels=1,
                     get_fill_color=[136, 8, 8],
-                    get_line_color=[0, 0, 0],
+                    get_line_color=[8, 136, 0],
                     pickable=True
 
                 ),
