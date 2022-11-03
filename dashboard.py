@@ -14,7 +14,7 @@ st.set_page_config(
 
 st.title("Bussie API Dashboard")
 
-st.subheader('Public transport movements in NL 🇳🇱')
+st.subheader('Tracking Public transport movements 🇳🇱')
 
 with st.empty():
     while True:
@@ -33,9 +33,9 @@ with st.empty():
                 }},
             map_style=None,
             initial_view_state=pdk.ViewState(
-                latitude=52.1935,
-                longitude=5.1173,
-                zoom=7,
+                latitude=52.3676,
+                longitude=4.9041,
+                zoom=11,
                 pitch=35,
             ),
             layers=[
