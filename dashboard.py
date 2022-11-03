@@ -19,11 +19,12 @@ st.subheader('Public transport movements in NL 🇳🇱')
 with st.empty():
     while True:
         df = pd.pandas.read_json('https://bussie.vdotvo9a4e2a6.eu-central-1.cs.amazonlightsail.com/API/V1/get_vehicles', orient='index')
-        df = pd.DataFrame(df,columns=['linenumber','latitude', 'longitude'])
+        df = pd.DataFrame(df,columns=['latitude', 'longitude','dataownercode','lineplanningnumber','journeynumber','userstopcode','vehiclenumber'])
+        print(df)
         st.pydeck_chart(pdk.Deck(
             tooltip ={
                 "html":
-                    "<b>Line:</b>{linenumber}<br/>",
+                    "<b>Line:</b> {lineplanningnumber} from operator: {dataownercode}<br/><b>Vehiclenumber: </b> {vehiclenumber} on it's way to stationnumber: {userstopcode}. On journey {journeynumber}<br/>",
                 "style": {
                     "backgroundColor": "lightgrey",
                     "color": "black",
@@ -51,4 +52,4 @@ with st.empty():
                 ),
             ],
         ))
-        time.sleep(1)
+        time.sleep(5)
