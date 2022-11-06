@@ -20,12 +20,12 @@ with st.empty():
     while True:
         try:
             df = pd.pandas.read_json('https://bussie.vdotvo9a4e2a6.eu-central-1.cs.amazonlightsail.com/API/V1/get_vehicles', orient='index')
-            df = pd.DataFrame(df,columns=['latitude', 'timestamp', 'longitude','dataownercode','lineplanningnumber','journeynumber','userstopcode','vehiclenumber'])
-            df['timestamp'] = df['timestamp'].apply(lambda x: x.strftime('%Y-%m-%d %X'))
+            df = pd.DataFrame(df,columns=['latitude', 'timestamp', 'longitude','vehiclenumber'])
+            #df['timestamp'] = df['timestamp'].apply(lambda x: x.strftime('%Y-%m-%d %X'))
             st.pydeck_chart(pdk.Deck(
                 tooltip ={
                     "html":
-                        "<b>Line:</b> {lineplanningnumber} from operator: {dataownercode}<br/><b>Vehicle number: </b> {vehiclenumber} <br><b>To stationnumber:</b> {userstopcode} <br> <b>Journey</b> {journeynumber}<br/> <b>Updated:</b> {timestamp} ",
+                        "<b>Vehicle:</b> {vehiclenumber} <br/>",
                     "style": {
                         "backgroundColor": "lightgrey",
                         "color": "black",
