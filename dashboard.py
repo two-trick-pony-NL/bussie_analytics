@@ -15,7 +15,8 @@ st.set_page_config(
 st.title("🚎🚂 API Dashboard")
 
 st.subheader('Tracking Public transport movements in NL 🇳🇱')
-st.text('This dashboard is a proof of concept by Peter van Doorn. The hypothesis was: Can we plot  public transport on a map?')
+st.text('This dashboard is a proof of concept by Peter van Doorn. The hypothesis was: Can we obtain reliable public transport data and plot it on a map?')
+st.text('the answer it turns out: YES!🎉')
 st.text('Stay tuned for part 2 of this project 🥳')
 with st.empty():
     while True:
