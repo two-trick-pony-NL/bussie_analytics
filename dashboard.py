@@ -15,19 +15,27 @@ st.set_page_config(
 st.title("🚎🚂 API Dashboard")
 
 st.subheader('Tracking Public transport movements in NL 🇳🇱')
-st.text('This dashboard is a proof of concept by Peter van Doorn. The hypothesis was: Can we plot all public transport on a map?. Now it turns out we can, it is time for part 2 of the project')
-st.text("Part 2: Building an app that ingests this data.")
-st.text("The idea is that while walking to the trainstation you can have an app that shows you where your train is right now, giving you the option to decide if you have enough time for coffee or whether you gotta run!")
+st.text('This dashboard is a proof of concept by Peter van Doorn. The hypothesis was: Can we plot  public transport on a map?')
+st.text('Stay tuned for part 2 of this project 🥳')
 with st.empty():
     while True:
         try:
             df = pd.pandas.read_json('https://bussie.vdotvo9a4e2a6.eu-central-1.cs.amazonlightsail.com/API/V1/get_vehicles', orient='index')
-            df = pd.DataFrame(df,columns=['latitude', 'timestamp', 'longitude','vehiclenumber'])
+            df = pd.DataFrame(df,columns=['latitude', 'type_vehicle','dataownercode', 'timestamp', 'longitude','vehiclenumber'])
+            
+            bus_train = df[df.type_vehicle.eq('BusOrTram')]
+            bus_train['type_vehicle'] = bus_train['type_vehicle'].replace(['BusOrTram'], '🚌')
+            ns = df[df.type_vehicle.eq('Train')]
+            ns['type_vehicle'] = ns['type_vehicle'].replace(['Train'], '🚂')
+
+
+
+            
             #df['timestamp'] = df['timestamp'].apply(lambda x: x.strftime('%Y-%m-%d %X'))
             st.pydeck_chart(pdk.Deck(
                 tooltip ={
                     "html":
-                        "<b>Vehicle:</b> {vehiclenumber} <br/>",
+                        "<h4 style='color:black'>{type_vehicle} {dataownercode}</h4><b>Vehicle Number:</b> {vehiclenumber}  <br><b> Latitude: </b> {latitude} <br> <b> longitude: </b> {longitude}<br> <b> Last Update:</b> {timestamp} <br> ",
                     "style": {
                         "backgroundColor": "lightgrey",
                         "color": "black",
@@ -42,7 +50,20 @@ with st.empty():
                 layers=[
                     pdk.Layer(
                         'ScatterplotLayer',
-                        data=df,
+                        data=bus_train,
+                        get_position='[longitude, latitude]',
+                        radius_scale=6,
+                        radius_min_pixels=10,
+                        radius_max_pixels=5,
+                        line_width_min_pixels=1,
+                        get_fill_color=[136, 136, 136],
+                        get_line_color=[8, 136, 0],
+                        pickable=True
+
+                    ),
+                    pdk.Layer(
+                        'ScatterplotLayer',
+                        data=ns,
                         get_position='[longitude, latitude]',
                         radius_scale=6,
                         radius_min_pixels=10,
