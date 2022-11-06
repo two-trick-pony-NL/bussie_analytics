@@ -21,8 +21,8 @@ st.text('Stay tuned for part 2 of this project 🥳')
 with st.empty():
     while True:
         try:
-            df = pd.pandas.read_json('https://bussie.vdotvo9a4e2a6.eu-central-1.cs.amazonlightsail.com/API/V1/get_vehicles', orient='index')
-            df = pd.DataFrame(df,columns=['latitude', 'type_vehicle','dataownercode', 'timestamp', 'longitude','vehiclenumber'])
+            df = pd.pandas.read_json('http://localhost/API/V1/get_vehicles', orient='index')
+            df = pd.DataFrame(df,columns=['latitude', 'type_vehicle','dataownercode', 'timestamp', 'longitude','vehiclenumber', 'speed'])
             
             bus_train = df[df.type_vehicle.eq('BusOrTram')]
             bus_train['type_vehicle'] = bus_train['type_vehicle'].replace(['BusOrTram'], '🚌')
@@ -36,7 +36,7 @@ with st.empty():
             st.pydeck_chart(pdk.Deck(
                 tooltip ={
                     "html":
-                        "<h4 style='color:black'>{type_vehicle} {dataownercode}</h4><b>Vehicle Number:</b> {vehiclenumber}  <br><b> Latitude: </b> {latitude} <br> <b> longitude: </b> {longitude}<br> <b> Last Update:</b> {timestamp} <br> ",
+                        "<h4 style='color:black'>{type_vehicle} {dataownercode}</h4><b>Vehicle Number:</b> {vehiclenumber}  <br><b> Speed: </b>{speed} km/h <br><b> Latitude: </b> {latitude} <br> <b> longitude: </b> {longitude}<br> <b> Last Update:</b> {timestamp} <br> ",
                     "style": {
                         "backgroundColor": "lightgrey",
                         "color": "black",
