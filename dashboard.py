@@ -21,7 +21,7 @@ st.text('Stay tuned for part 2 of this project 🥳')
 with st.empty():
     while True:
         try:
-            df = pd.pandas.read_json('http://localhost/API/V1/get_vehicles', orient='index')
+            df = pd.pandas.read_json('https://bussie.vdotvo9a4e2a6.eu-central-1.cs.amazonlightsail.com/API/V1/get_vehicles', orient='index')
             df = pd.DataFrame(df,columns=['latitude', 'type_vehicle','dataownercode', 'timestamp', 'longitude','vehiclenumber', 'speed'])
             
             bus_train = df[df.type_vehicle.eq('BusOrTram')]
