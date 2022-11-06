@@ -8,14 +8,16 @@ import pydeck as pdk
 number_of_vehicles = 0
 
 st.set_page_config(
-    page_title="Bussie Dashboard",
+    page_title="Public transport Dashboard",
     page_icon="🚎",
     layout="wide")
 
-st.title("Bussie API Dashboard")
+st.title("🚎🚂 API Dashboard")
 
-st.subheader('Tracking Public transport movements 🇳🇱')
-
+st.subheader('Tracking Public transport movements in NL 🇳🇱')
+st.text('This dashboard is a proof of concept by Peter van Doorn. The hypothesis was: Can we plot all public transport on a map?. Now it turns out we can, it is time for part 2 of the project')
+st.text("Part 2: Building an app that ingests this data.")
+st.text("The idea is that while walking to the trainstation you can have an app that shows you where your train is right now, giving you the option to decide if you have enough time for coffee or whether you gotta run!")
 with st.empty():
     while True:
         try:
