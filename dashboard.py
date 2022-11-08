@@ -77,6 +77,6 @@ with st.empty():
                     ),
                 ],
             ))
-            time.sleep(5)
+            time.sleep(2)
         except Exception as e: 
             print(e)
