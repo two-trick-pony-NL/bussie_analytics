@@ -23,6 +23,7 @@ with st.empty():
         response = response.json()
         df = pd.DataFrame.from_dict(response)
         df = df.T
+        print(df)
         df = pd.DataFrame(df,columns=['latitude', 'longitude','vehiclenumber', 'dataownercode', 'timestamp'])
         df.dropna(how='all')  
         df = df[pd.to_numeric(df['latitude'], errors='coerce').notnull()]
