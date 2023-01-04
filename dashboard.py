@@ -19,11 +19,10 @@ st.text('This dashboard is a proof of concept by Peter van Doorn.')
 
 with st.empty():
     while True:
-        response = requests.get("https://bussie.vdotvo9a4e2a6.eu-central-1.cs.amazonlightsail.com/API/V1/get_vehicles")
+        response = requests.get("https://bussie.vdotvo9a4e2a6.eu-central-1.cs.amazonlightsail.com/API/V1/get_all_vehicle_information")
         response = response.json()
         df = pd.DataFrame.from_dict(response)
         df = df.T
-        print(df)
         df = pd.DataFrame(df,columns=['latitude', 'longitude','vehiclenumber', 'dataownercode', 'timestamp'])
         df.dropna(how='all')  
         df = df[pd.to_numeric(df['latitude'], errors='coerce').notnull()]
